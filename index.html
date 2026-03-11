@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Presentation - Charlise</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #d4a373; /* Couleur un peu cuir/équitation */
+            --bg: #fefae0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--primary);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        h1 { font-size: 3rem; margin-bottom: 10px; color: var(--primary); }
+        .subtitle { font-style: italic; color: var(--accent); font-size: 1.2rem; }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Style des sections photo */
+        .profile-section {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .img-container {
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .img-container:hover { transform: scale(1.05); }
+
+        img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Cartes interactives */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+
+        .card.visible { opacity: 1; transform: translateY(0); }
+
+        .btn-reveal {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-reveal:hover { background: var(--primary); }
+
+        .hidden-content { display: none; margin-top: 15px; line-height: 1.6; }
+
+        ul { list-style-type: ""; }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Exposé anglais</h1>
+        <p class="subtitle"></p>
+    </header>
+
+    <div class="container">
+        
+        <div class="profile-section">
+            <div class="img-container">
+                <img src="photo1.jpg" alt="Charlise riding">
+            </div>
+            <div class="img-container">
+                <img src="photo2.jpg" alt="Charlise and her horse">
+            </div>
+        </div>
+
+        <div class="card" id="card1">
+            <h2>Who is she?</h2>
+            <button class="btn-reveal" onclick="toggleContent('identity')">Show Identity</button>
+            <div id="identity" class="hidden-content">
+                <p><strong>Full Name:</strong> Seguy Moinier Charlise</p>
+                <p><strong>Born:</strong> March 15th, 2010, in Sarlat</p>
+                <p><strong>Nationality:</strong> French</p>
+                <p><strong>Location:</strong> She lives in Gourdon</p>
+                <p><strong>Languages:</strong> She speaks French and English</p>
+            </div>
+        </div>
+
+        <div class="card" id="card2">
+            <h2>Physical Description</h2>
+            <button class="btn-reveal" onclick="toggleContent('physical')">Show Details</button>
+            <div id="physical" class="hidden-content">
+                <ul>
+                    <li>She has got a round face</li>
+                    <li>She has got long straight blond hair</li>
+                    <li>She has got brown eyes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" id="card3">
+            <h2>Hobbies & Interests</h2>
+            <button class="btn-reveal" onclick="toggleContent('hobbies')">Show More</button>
+            <div id="hobbies" class="hidden-content">
+                <p><strong>Like:</strong> She loves horse riding!</p>
+                <p><strong>Dislike:</strong> She doesn’t like meat.</p>
+                <p><strong>Favorite Subjects:</strong> Biology and Physical Chemistry.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Fonction pour afficher/cacher le contenu
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+
+        // Animation d'apparition des cartes au chargement
+        window.onload = () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, 300 * (index + 1));
+            });
+        };
+    </script>
+
+</body>
+</html>
